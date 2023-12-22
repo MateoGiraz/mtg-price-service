@@ -1,3 +1,14 @@
+# Setup
+
+## Instalar dependencias
+```js
+pip install -r .\requirements.txt 
+``` 
+## Quick start
+
+```js
+python -m uvicorn main:app --reload
+```
 # API docs
 > :warning: **Por el momento no se puede filtrar según el estado de la carta**
 
