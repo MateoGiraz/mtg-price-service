@@ -1,15 +1,17 @@
-import re
 from service.scrapper import scrap
 from model.card import Card
 
-def get_prices(card_name, session):
-  existing_prices = session.query(Card).filter_by(name=card_name).all()
+def get_prices(card_name, card_edition, session):
+  if (card_edition == ""):
+    existing_prices = session.query(Card).filter_by(name=card_name).all() 
+  else:
+    existing_prices = session.query(Card).filter_by(name=card_name, edition=card_edition).all()
 
   if existing_prices and all(data.is_fresh() for data in existing_prices):
     return existing_prices
     
   prices = scrap(card_name)
-  cards = [Card(name, getDouble(price)) for name, price in prices if name == card_name]
+  cards = [Card(name, price, edition) for name, price, edition in prices if name == card_name and (edition == card_edition or card_edition == "")]
 
   session.query(Card).filter_by(name=card_name).delete()
 
@@ -17,8 +19,3 @@ def get_prices(card_name, session):
   session.commit()
   
   return cards
-
-def getDouble(price):
-  numeric_string = re.sub(r'[^\d.]', '', price)
-  return float(numeric_string)
-  

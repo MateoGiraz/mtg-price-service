@@ -1,4 +1,5 @@
 import sys
+import re
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -25,7 +26,16 @@ def scrap(name):
     title = card.find('span', class_="productDetailTitle").text.strip()
     price = card.find('span', class_="stylePrice").text.strip()
 
-    results.append((title, price))
+    edition = card.find('div', class_="productDetailSet").find("a").text.strip()
+
+    results.append((title, getDouble(price), getEditionString(edition)))
 
   dr.quit()
   return results
+
+def getDouble(price):
+  numeric_string = re.sub(r'[^\d.]', '', price)
+  return float(numeric_string)
+
+def getEditionString(edition):
+  return edition.split('\n')[0]

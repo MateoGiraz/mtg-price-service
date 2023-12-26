@@ -12,15 +12,17 @@ class Card(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     price = Column(Double)
+    edition = Column(String)
     timestamp = Column(DateTime, default=func.now(), onupdate=func.current_timestamp())
 
-    def __init__(self, name, price, timestamp=func.now()):
+    def __init__(self, name, price, edition, timestamp=func.now()):
       self.name = name
       self.price = price
+      self.edition = edition
       self.timestamp = timestamp
     
     def to_dict(self):
-      return { 'name': self.name, 'price': self.price }
+      return { 'name': self.name, 'price': self.price, 'edition': self.edition }
 
     def is_fresh(self):
       current_time = datetime.utcnow()
