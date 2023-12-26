@@ -33,6 +33,7 @@ Devuelve los precios de las cartas con igual nombre al parámetro name recibido
 
 
 * <code>name<strong></strong></code> (requerido): El nombre de la carta.
+* <code>edition<strong></strong></code> (opcional): La edición de la carta.
 
 <strong>Response</strong>
 
@@ -47,6 +48,7 @@ Devuelve un JSON con una colección de las siguientes propiedades:
 
 * `name:` El nombre de la carta.
 * `price:` El precio de la carta.
+* `edition:` La edición de la carta.
 
 ```js
  400 - (Bad Request)
@@ -61,7 +63,7 @@ Request:
 
 
 ```js
-GET /price?name=Underground Sea
+GET /price?name=Underground%Sea
 ```
 
 Response:
@@ -71,19 +73,46 @@ Response:
 [
   {
     "name": "Underground Sea",
-    "price": 749.99
+    "price": 749.99,
+    "edition": "3rd Edition"
   },
   {
     "name": "Underground Sea",
-    "price": 16999.99
+    "price": 16999.99,
+    "edition": "Alpha"
   },
   {
     "name": "Underground Sea",
-    "price": 8799.99
+    "price": 8799.99,
+    "edition": "Beta"
   },
   {
     "name": "Underground Sea",
-    "price": 2099.99
+    "price": 2099.99,
+    "edition": "Unlimited"
   }
 ]
 ```
+
+**Example**
+
+Request:
+
+
+```js
+GET /price?name=Underground%Sea&edition=Beta
+```
+
+Response:
+
+
+```js
+[
+  {
+    "name": "Underground Sea",
+    "price": 8799.99,
+    "edition": "Beta"
+  }
+]
+```
+
