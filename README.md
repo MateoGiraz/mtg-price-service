@@ -32,8 +32,9 @@ Devuelve los precios de las cartas con igual nombre al parámetro name recibido
 
 
 
-* <code>name<strong></strong></code> (requerido): El nombre de la carta.
-* <code>edition<strong></strong></code> (opcional): La edición de la carta.
+* <code>name (string)<strong></strong></code> (requerido): El nombre de la carta.
+* <code>edition (string)<strong></strong></code> (opcional): La edición de la carta.
+* <code>foil (bool)<strong></strong></code> (opcional): La característica foil de la carta.
 
 <strong>Response</strong>
 
@@ -46,15 +47,22 @@ Devuelve los precios de las cartas con igual nombre al parámetro name recibido
 Devuelve un JSON con una colección de las siguientes propiedades:
 
 
-* `name:` El nombre de la carta.
-* `price:` El precio de la carta.
-* `edition:` La edición de la carta.
+```js
+"name": "El nombre de la carta",
+"edition": "La edición de la carta",
+"foil": "La característica foil de la carta",
+"prices": {
+  "nm": 0,
+  "ex": 0,
+  "vg": 0,
+  "g": 0,
+}
+```
 
 ```js
  400 - (Bad Request)
  500 - (Internal Server Error)
 ```
-
 
 
 **Example**
@@ -63,7 +71,7 @@ Request:
 
 
 ```js
-GET /price?name=Underground%Sea
+GET /price?name=Goblin Matron
 ```
 
 Response:
@@ -72,44 +80,48 @@ Response:
 ```js
 [
   {
-    "name": "Underground Sea",
+    "name": "Goblin Matron",
+    "edition": "Dominaria Remastered",
+    "foil": false,
     "prices": {
-      "nm": 749.99,
-      "ex": 674.99,
-      "vg": 599.99,
-      "g": 524.99
-    },
-    "edition": "3rd Edition"
+      "nm": 0.35,
+      "ex": 0.28,
+      "vg": 0.25,
+      "g": 0.18
+    }
   },
   {
-    "name": "Underground Sea",
+    "name": "Goblin Matron",
+    "edition": "Portal II",
+    "foil": false,
     "prices": {
-      "nm": 16999.99,
-      "ex": 13599.99,
-      "vg": 10199.99,
-      "g": 6800.0
-    },
-    "edition": "Alpha"
+      "nm": 2.99,
+      "ex": 2.39,
+      "vg": 2.09,
+      "g": 1.5
+    }
   },
   {
-    "name": "Underground Sea",
+    "name": "Goblin Matron",
+    "edition": "Modern Horizons",
+    "foil": false,
     "prices": {
-      "nm": 8799.99,
-      "ex": 7039.99,
-      "vg": 5279.99,
-      "g": 3520.0
-    },
-    "edition": "Beta"
+      "nm": 0.35,
+      "ex": 0.28,
+      "vg": 0.25,
+      "g": 0.18
+    }
   },
   {
-    "name": "Underground Sea",
+    "name": "Goblin Matron",
+    "edition": "Anthologies",
+    "foil": false,
     "prices": {
-      "nm": 2099.99,
-      "ex": 1679.99,
-      "vg": 1259.99,
-      "g": 840.0
-    },
-    "edition": "Unlimited"
+      "nm": 0.59,
+      "ex": 0.47,
+      "vg": 0.41,
+      "g": 0.3
+    }
   }
 ]
 ```
@@ -120,7 +132,7 @@ Request:
 
 
 ```js
-GET /price?name=Underground%Sea&edition=Beta
+GET /price?name=Goblin Matron&edition=Modern Horizons&foil=true
 ```
 
 Response:
@@ -129,15 +141,16 @@ Response:
 ```js
 [
   {
-    "name": "Underground Sea",
+    "name": "Goblin Matron",
+    "edition": "Modern Horizons",
+    "foil": true,
     "prices": {
-      "nm": 8799.99,
-      "ex": 7039.99,
-      "vg": 5279.99,
-      "g": 3520.0
-    },
-    "edition": "Beta"
-  },
+      "nm": 1.49,
+      "ex": 1.19,
+      "vg": 0.89,
+      "g": 0.6
+    }
+  }
 ]
 ```
 
