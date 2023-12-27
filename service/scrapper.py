@@ -24,16 +24,21 @@ def scrap(name):
 
   for card in cards:
     title = card.find('span', class_="productDetailTitle").text.strip()
-    price = card.find('span', class_="stylePrice").text.strip()
-
     edition = card.find('div', class_="productDetailSet").find("a").text.strip()
 
-    results.append((title, getDouble(price), getEditionString(edition)))
+    card_prices = card.find_all('span', class_="stylePrice")
+
+    nm_price = getFloat(card_prices[0].text.strip())
+    ex_price = getFloat(card_prices[1].text.strip())
+    vg_price = getFloat(card_prices[2].text.strip())
+    g_price = getFloat(card_prices[3].text.strip())
+
+    results.append((title, {'nm': nm_price, 'ex': ex_price, 'vg': vg_price, 'g': g_price}, getEditionString(edition)))
 
   dr.quit()
   return results
 
-def getDouble(price):
+def getFloat(price):
   numeric_string = re.sub(r'[^\d.]', '', price)
   return float(numeric_string)
 
