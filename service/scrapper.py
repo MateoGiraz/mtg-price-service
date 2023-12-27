@@ -5,9 +5,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from collections import namedtuple
 
-def scrap(name):
-  url = "http://www.cardkingdom.com/catalog/view?filter%%5Bipp%%5D=60&filter%%5Bsort%%5D=most_popular&filter%%5Bsearch%%5D=mtg_advanced&filter%%5Bname%%5D=%s&filter%%" % (name)
-
+def scrap(name, is_foil):
+  if(is_foil):
+    url = "http://www.cardkingdom.com/catalog/view?filter[tab]=mtg_foil&filter%%5Bipp%%5D=60&filter%%5Bsort%%5D=most_popular&filter%%5Bsearch%%5D=mtg_advanced&filter%%5Bname%%5D=%s&filter%%" % (name)  
+  else:
+    url = "http://www.cardkingdom.com/catalog/view?filter%%5Bipp%%5D=60&filter%%5Bsort%%5D=most_popular&filter%%5Bsearch%%5D=mtg_advanced&filter%%5Bname%%5D=%s&filter%%" % (name)
+  
   results = []
 
   chrome_options = Options()
