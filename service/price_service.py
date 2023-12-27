@@ -13,7 +13,10 @@ def get_prices(card_name, card_edition, is_foil, session):
   prices = scrap(card_name, is_foil)
   cards = [Card(name, price, edition, is_foil) for name, price, edition in prices if name == card_name and (edition == card_edition or card_edition == "")]
 
-  session.query(Card).filter_by(name=card_name).delete()
+  if (card_edition == ""):
+    session.query(Card).filter_by(name=card_name, foil=is_foil).delete()
+  else:
+    session.query(Card).filter_by(name=card_name, edition=card_edition, foil=is_foil).delete()
 
   session.add_all(cards)
   session.commit()
