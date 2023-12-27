@@ -73,22 +73,42 @@ Response:
 [
   {
     "name": "Underground Sea",
-    "price": 749.99,
+    "prices": {
+      "nm": 749.99,
+      "ex": 674.99,
+      "vg": 599.99,
+      "g": 524.99
+    },
     "edition": "3rd Edition"
   },
   {
     "name": "Underground Sea",
-    "price": 16999.99,
+    "prices": {
+      "nm": 16999.99,
+      "ex": 13599.99,
+      "vg": 10199.99,
+      "g": 6800.0
+    },
     "edition": "Alpha"
   },
   {
     "name": "Underground Sea",
-    "price": 8799.99,
+    "prices": {
+      "nm": 8799.99,
+      "ex": 7039.99,
+      "vg": 5279.99,
+      "g": 3520.0
+    },
     "edition": "Beta"
   },
   {
     "name": "Underground Sea",
-    "price": 2099.99,
+    "prices": {
+      "nm": 2099.99,
+      "ex": 1679.99,
+      "vg": 1259.99,
+      "g": 840.0
+    },
     "edition": "Unlimited"
   }
 ]
@@ -110,9 +130,14 @@ Response:
 [
   {
     "name": "Underground Sea",
-    "price": 8799.99,
+    "prices": {
+      "nm": 8799.99,
+      "ex": 7039.99,
+      "vg": 5279.99,
+      "g": 3520.0
+    },
     "edition": "Beta"
-  }
+  },
 ]
 ```
 
