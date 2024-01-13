@@ -7,7 +7,7 @@ app = FastAPI()
 
 @app.get("/price")
 async def get_card(name: str = "", edition: str = "", foil: bool = False):
-    postgresURL = os.environ['DATABASE_URL']
-    session = connect(postgresURL)
+    #postgresURL = os.environ['DATABASE_URL']
+    session = connect('postgresql://postgres:eD-DcfGfGAFcBB243fBa-BG62FcBG*6A@roundhouse.proxy.rlwy.net:24000/railway')#postgresURL)
     prices = get_prices(name, edition, foil, session)
     return list(map(lambda price: price.to_dict(), prices))
